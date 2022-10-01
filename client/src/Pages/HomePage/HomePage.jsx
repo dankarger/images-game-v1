@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
+import {pickRandomPicture} from "../../utils/utils";
 
 const HomePage = () => {
-    const [image, setImage] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const handleStartButtonClick=async ()=>{
         console.log('start')
-      const picture =   api.get('/picture?query=test')
+      const picturesList =  await api.get('/picture?query=test')
+       const picture = pickRandomPicture(picturesList.data)
         console.log('pic',picture)
     }
 
