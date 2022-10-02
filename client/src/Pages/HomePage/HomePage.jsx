@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
-import {pickRandomPicture} from "../../utils/utils";
+import {pickRandomPicture } from "../../utils/utils";
+import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
 import Picture from "../../components/Picture/Picture"
 import './HomePage.css'
 
@@ -12,9 +13,15 @@ const HomePage = () => {
         title:'raNDOM',
 
     });
+    const [value, setValue] = useState('');
+    const { listen, listening, stop } = useSpeechRecognition({
+        onResult: (result) => {
+            setValue(result);
+        },
+    });
+
+
     // const [imgTitle, setImgTitle] = useState('test');
-
-
     const handleStartButtonClick = async (query)=>{
       console.log('start')
       const picturesList =  await api.get(`/picture?query=${query}`)
@@ -35,6 +42,18 @@ const HomePage = () => {
             <BasicButton label='start' theme={"outlined"} onclick={()=>handleStartButtonClick('test2')} />
             { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.title2}/> }
             {/*<img src={imageUrl?.src.medium}/>*/}
+
+
+            <textarea
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
+            />
+            <button onMouseDown={listen} onMouseUp={stop}>
+                🎤
+            </button>
+            {listening && <div>Go ahead I'm listening</div>}
+
+
         </div>
     )
 }

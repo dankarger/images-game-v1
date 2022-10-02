@@ -29,7 +29,7 @@ const useEventCallback = (fn, dependencies) => {
     }, [ref]);
 };
 
-const useSpeechRecognition = (props = {}) => {
+export const useSpeechRecognition = (props = {}) => {
     const { onEnd = () => {}, onResult = () => {}, onError = () => {} } = props;
     const recognition = useRef(null);
     const [listening, setListening] = useState(false);
