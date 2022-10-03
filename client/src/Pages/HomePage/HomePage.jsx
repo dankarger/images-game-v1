@@ -4,6 +4,7 @@ import api from "../../Api/Api";
 import {pickRandomPicture } from "../../utils/utils";
 import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
 import Picture from "../../components/Picture/Picture";
+import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
 
 import './HomePage.css'
@@ -12,7 +13,7 @@ const HomePage = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [randomPicture, setRandomPicture] = useState({
         src:{},
-        title:'raNDOM',
+        title:'random',
 
     });
     const [imagesList, setImagesList] = useState([]);
@@ -29,11 +30,9 @@ const HomePage = () => {
     const [counter, setCounter ] = useState(0)
 
     useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
+        // const controller = new AbortController();
+        // const signal = controller.signal;
         let isCancel = false;
-        console.log('listenValue',value);
-        console.log('listenting',listening)
         if(!isCancel && value ){
             // setTimeout(()=>{
                 getImageFromPexelApi(value).then(res=>console.log('res',res))
@@ -44,7 +43,6 @@ const HomePage = () => {
             isCancel=true;
        }
     },[value])
-
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async ()=>{
         if(!isGameInProgress){
@@ -62,15 +60,22 @@ const HomePage = () => {
     }
     const getImageFromPexelApi = async (query)=>{
         console.log('start')
-        const picturesList =  await api.get(`/picture?query=${query}`)
-        const picture = await pickRandomPicture(picturesList.data);
-        setImageUrl(picture.src.original)
-        const pictureObj = {...picture,imgTitle:query}
-        setRandomPicture((prev)=>(pictureObj))
-        // setRandomPicture((prev)=>({...prev,title:query}))
-        // setImagesList((prev)=>prev.push(pictureObj));
-        // console.log('list',imagesList)
-        setCounter((prev)=>prev+1)
+        try {
+            const picturesList =  await api.get(`/picture?query=${query}`)
+            const picture = await pickRandomPicture(picturesList.data);
+            setImageUrl(picture.src.original)
+            const pictureObj = {...picture,imgTitle:query}
+            setRandomPicture((prev)=>(pictureObj))
+            const imagesListCurrent = imagesList
+            imagesListCurrent.push(pictureObj)
+            setImagesList(imagesListCurrent);
+            setCounter((prev)=>prev+1)
+            console.log('s',randomPicture)
+        }
+        catch(err){
+            console.log(err)
+        }
+
     }
 
     const activateListenFunction = ()=>{
@@ -79,11 +84,9 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            HOMEPAGE
             <Counter count={counter} />
             <BasicButton label='START' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
-            { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.imgTitle}/> }
-            {/*<img src={imageUrl?.src.medium}/>*/}
+            <PictureContainer pictureObject={randomPicture} />
             <div className='buttons-div'>
                 <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop} />
                 <BasicButton label='STOP' theme="contained" color={'error'} onclick={handleStopButton} />
