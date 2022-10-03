@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
 import {pickRandomPicture } from "../../utils/utils";
@@ -19,14 +19,38 @@ const HomePage = () => {
             setValue(result);
         },
     });
+    const [ isGameInProgress, setIsGameInProgress] = useState(false)
 
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+        let isCancel = false;
+        console.log('listenValue',value);
+        console.log('listenting',listening)
+        if(!isCancel && value ){
+            getImageFromPexelApi(value).then(res=>console.log('res',res))
+        }
+       return()=>{
+            console.log('cancel request');
+            isCancel=true;
+       }
+    },[value])
 
     // const [imgTitle, setImgTitle] = useState('test');
-    const handleStartButtonClick = async (query)=>{
-        await getImageFromPexelApi('random');
-        activateListenFunction()
+    const handleStartButtonClick = async ()=>{
+        if(!isGameInProgress){
+            await getImageFromPexelApi('random');
+            activateListenFunction();
+            setIsGameInProgress(true);
+        }
+        else {
+            activateListenFunction();
+        }
     }
+    const handleStopButton =() =>{
+        setIsGameInProgress(false);
 
+    }
     const getImageFromPexelApi = async (query)=>{
         console.log('start')
         const picturesList =  await api.get(`/picture?query=${query}`)
@@ -44,20 +68,22 @@ const HomePage = () => {
     return (
         <div className='home-page'>
             HOMEPAGE
-            <BasicButton label='start' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
+            <BasicButton label='START' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
             { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.imgTitle}/> }
             {/*<img src={imageUrl?.src.medium}/>*/}
-
+            <div className='buttons-div'>
+                <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop} />
+                <BasicButton label='STOP' theme="contained" color={'error'} onclick={stop} />
+            </div>
 
             <textarea
                 value={value}
                 onChange={(event) => setValue(event.target.value)}
             />
-            <button onMouseDown={listen} onMouseUp={stop}>
-                🎤
-            </button>
-            {listening && <div>Go ahead I'm listening</div>}
-
+            {/*<button onMouseDown={listen} onMouseUp={stop}>*/}
+            {/*    🎤*/}
+            {/*</button>*/}
+            {/*{listening && <div>Go ahead I'm listening</div>}*/}
 
         </div>
     )
