@@ -7,7 +7,9 @@ import Picture from "../../components/Picture/Picture";
 import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
 
+
 import './HomePage.css'
+
 
 const HomePage = () => {
     const [imageUrl, setImageUrl] = useState('');
@@ -27,7 +29,7 @@ const HomePage = () => {
         },
     });
     const [ isGameInProgress, setIsGameInProgress] = useState(false);
-    const [counter, setCounter ] = useState(0)
+    const [counter, setCounter ] = useState(-1)
 
     useEffect(()=>{
         // const controller = new AbortController();
@@ -37,12 +39,26 @@ const HomePage = () => {
             // setTimeout(()=>{
                 getImageFromPexelApi(value).then(res=>console.log('res',res))
             // },1000)
+
         }
        return()=>{
             console.log('cancel request');
             isCancel=true;
        }
-    },[value])
+    },[value]);
+
+    useEffect(()=>{
+        if(isGameInProgress){
+           const interval =  setInterval(()=>{
+                setCounter((prev)=>prev-1)
+            },1000)
+
+            return ()=>{
+                clearInterval(interval)
+            }
+        }
+    },[isGameInProgress])
+
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async ()=>{
         if(!isGameInProgress){
@@ -69,8 +85,8 @@ const HomePage = () => {
             const imagesListCurrent = imagesList
             imagesListCurrent.push(pictureObj)
             setImagesList(imagesListCurrent);
-            setCounter((prev)=>prev+1)
-            console.log('s',randomPicture)
+
+            setCounter(5)
         }
         catch(err){
             console.log(err)
@@ -84,9 +100,11 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            <Counter count={counter} />
             <BasicButton label='START' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
-            <PictureContainer pictureObject={randomPicture} />
+            <div className="main-container">
+                <PictureContainer pictureObject={randomPicture} />
+                <Counter count={counter} />
+            </div>
             <div className='buttons-div'>
                 <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop} />
                 <BasicButton label='STOP' theme="contained" color={'error'} onclick={handleStopButton} />
