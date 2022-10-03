@@ -3,7 +3,9 @@ import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
 import {pickRandomPicture } from "../../utils/utils";
 import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
-import Picture from "../../components/Picture/Picture"
+import Picture from "../../components/Picture/Picture";
+import Counter from "../../components/Counter/Counter";
+
 import './HomePage.css'
 
 const HomePage = () => {
@@ -13,13 +15,18 @@ const HomePage = () => {
         title:'raNDOM',
 
     });
+    const [imagesList, setImagesList] = useState([]);
     const [value, setValue] = useState('');
     const { listen, listening, stop } = useSpeechRecognition({
         onResult: (result) => {
-            setValue(result);
+            setTimeout(()=>{
+                setValue(result);
+            },500)
+
         },
     });
-    const [ isGameInProgress, setIsGameInProgress] = useState(false)
+    const [ isGameInProgress, setIsGameInProgress] = useState(false);
+    const [counter, setCounter ] = useState(0)
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -28,7 +35,9 @@ const HomePage = () => {
         console.log('listenValue',value);
         console.log('listenting',listening)
         if(!isCancel && value ){
-            getImageFromPexelApi(value).then(res=>console.log('res',res))
+            // setTimeout(()=>{
+                getImageFromPexelApi(value).then(res=>console.log('res',res))
+            // },1000)
         }
        return()=>{
             console.log('cancel request');
@@ -59,6 +68,9 @@ const HomePage = () => {
         const pictureObj = {...picture,imgTitle:query}
         setRandomPicture((prev)=>(pictureObj))
         // setRandomPicture((prev)=>({...prev,title:query}))
+        // setImagesList((prev)=>prev.push(pictureObj));
+        // console.log('list',imagesList)
+        setCounter((prev)=>prev+1)
     }
 
     const activateListenFunction = ()=>{
@@ -68,12 +80,13 @@ const HomePage = () => {
     return (
         <div className='home-page'>
             HOMEPAGE
+            <Counter count={counter} />
             <BasicButton label='START' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
             { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.imgTitle}/> }
             {/*<img src={imageUrl?.src.medium}/>*/}
             <div className='buttons-div'>
                 <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop} />
-                <BasicButton label='STOP' theme="contained" color={'error'} onclick={stop} />
+                <BasicButton label='STOP' theme="contained" color={'error'} onclick={handleStopButton} />
             </div>
 
             <textarea

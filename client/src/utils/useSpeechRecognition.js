@@ -56,7 +56,7 @@ export const useSpeechRecognition = (props = {}) => {
         if (listening || !supported) return;
         const {
             lang = '',
-            interimResults = true,
+            interimResults = false,
             continuous = false,
             maxAlternatives = 1,
             grammars,
