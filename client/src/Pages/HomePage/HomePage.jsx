@@ -23,24 +23,29 @@ const HomePage = () => {
 
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async (query)=>{
-      console.log('start')
-      const picturesList =  await api.get(`/picture?query=${query}`)
-       const picture = await pickRandomPicture(picturesList.data);
-          // setImgTitle(prev=>query)
-        // console.log('pic',picture)
-        setImageUrl(picture.src.original)
-        const pictureObj = {...picture,title2:query}
-        // setRandomPicture({...picture, title: query})
-        setRandomPicture(pictureObj)
-        console.log('title',pictureObj)
+        await getImageFromPexelApi('random');
+        activateListenFunction()
     }
 
+    const getImageFromPexelApi = async (query)=>{
+        console.log('start')
+        const picturesList =  await api.get(`/picture?query=${query}`)
+        const picture = await pickRandomPicture(picturesList.data);
+        setImageUrl(picture.src.original)
+        const pictureObj = {...picture,imgTitle:query}
+        setRandomPicture((prev)=>(pictureObj))
+        // setRandomPicture((prev)=>({...prev,title:query}))
+    }
+
+    const activateListenFunction = ()=>{
+        listen()
+    }
 
     return (
         <div className='home-page'>
             HOMEPAGE
-            <BasicButton label='start' theme={"outlined"} onclick={()=>handleStartButtonClick('test2')} />
-            { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.title2}/> }
+            <BasicButton label='start' theme={"outlined"} onclick={()=>handleStartButtonClick('random')} />
+            { imageUrl.length >0 && <Picture url={randomPicture.src.original} title={randomPicture?.imgTitle}/> }
             {/*<img src={imageUrl?.src.medium}/>*/}
 
 
