@@ -101,10 +101,13 @@ const HomePage = () => {
             {!isGameInProgress &&
             <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
             }
+
+            {isGameInProgress &&
             <div className="main-container">
                 <PictureContainer pictureObject={randomPicture}/>
                 <Counter count={counter}/>
             </div>
+            }
             {isGameInProgress &&
             <input
                 value={value}

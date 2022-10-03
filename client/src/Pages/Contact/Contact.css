@@ -1,0 +1,9 @@
+.contact-page {
+    width:100%;
+    height: calc(100% - 112px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:1rem;
+}
