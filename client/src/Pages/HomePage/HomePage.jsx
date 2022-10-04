@@ -7,9 +7,10 @@ import PictureContainer from "../../components/PictureContainer/PictureContainer
 import Counter from "../../components/Counter/Counter";
 import Score from "../../components/Score/Score";
 import Backdrop from "../../components/BackDrop/BackDrop";
-
+import {player} from "../../components/SoundPlayer/player";
+import {soundList} from "../../components/constants/soundsList";
+import BasicSelect from "../../components/Select/Select";
 import './HomePage.css'
-
 
 const HomePage = () => {
     const [randomPicture, setRandomPicture] = useState({
@@ -30,7 +31,7 @@ const HomePage = () => {
     const [counter, setCounter] = useState(6);
     const [score, setScore] = useState(0);
     const [step, setStep] = useState(0);
-    const [totalSteps, setTotalSteps] = useState(3)
+    const [totalSteps, setTotalSteps] = useState(4)
     const [showEndGame, setShowEndGame] = useState(false);
 
     useEffect(() => {
@@ -83,9 +84,11 @@ const HomePage = () => {
             activateListenFunction();
             setScore(0)
             setIsGameInProgress(true);
+
         } else {
             activateListenFunction();
         }
+        player(soundList['secondClick'])
     }
 
     const startAgainFunction = async () => {
@@ -97,6 +100,7 @@ const HomePage = () => {
 
     const handleStopButton = () => {
         setIsGameInProgress(false);
+        player(soundList['secondClick'])
 
     }
 
@@ -113,6 +117,7 @@ const HomePage = () => {
                 imagesListCurrent.push(pictureObj)
                 setImagesList(imagesListCurrent);
                 setCounter(5);
+                setValue('');
             }
         } catch (err) {
             console.log(err)
@@ -130,7 +135,10 @@ const HomePage = () => {
             <Score score={score}/>
             }
             {!isGameInProgress && !showEndGame &&
-            <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
+                <div className="start-button-container">
+                    <BasicSelect setTotalStep={setTotalSteps} />
+                    <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
+                </div>
             }
 
             {isGameInProgress &&
@@ -142,7 +150,7 @@ const HomePage = () => {
             {isGameInProgress &&
             <input
                 value={value}
-                onChange={(event) => setValue(event.target.value)}
+                onChange={(event) =>  setValue(event.target.value)}
             />
             }
             {isGameInProgress &&

@@ -28,3 +28,12 @@
     position: absolute;
     bottom:7rem;
 }
+.start-button-container {
+    position: absolute;
+    top:140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    flex-direction: column;
+}
