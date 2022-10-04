@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
-import {pickRandomPicture} from "../../utils/utils";
+import {pickRandomPicture, pickRandomSubject} from "../../utils/utils";
 import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
 import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
@@ -37,7 +37,7 @@ const HomePage = () => {
         // const controller = new AbortController();
         // const signal = controller.signal;
         let isCancel = false;
-        if (!isCancel && value) {
+        if (!isCancel &&isGameInProgress && value) {
             // setTimeout(()=>{
             getImageFromPexelApi(value).then(res => console.log('res', res))
             // },1000)
@@ -69,6 +69,7 @@ const HomePage = () => {
             setIsGameInProgress(false);
             setShowEndGame(true);
             stop()
+            setValue('')
             console.log('game-over')
         }
     }, [step])
@@ -76,7 +77,7 @@ const HomePage = () => {
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async () => {
         if (!isGameInProgress) {
-            await getImageFromPexelApi('random');
+            await getImageFromPexelApi(pickRandomSubject());
             activateListenFunction();
             setScore(0)
             setIsGameInProgress(true);
@@ -98,9 +99,8 @@ const HomePage = () => {
     }
 
     const getImageFromPexelApi = async (query) => {
-
         try {
-            if (step < totalSteps) {
+            if (step <= totalSteps ) {
                 setScore((prev) => prev + counter);
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
