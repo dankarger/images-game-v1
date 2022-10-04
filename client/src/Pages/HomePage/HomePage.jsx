@@ -6,7 +6,7 @@ import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
 import Picture from "../../components/Picture/Picture";
 import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
-
+import Score from "../../components/Score/Score";
 
 import './HomePage.css'
 
@@ -29,7 +29,8 @@ const HomePage = () => {
         },
     });
     const [isGameInProgress, setIsGameInProgress] = useState(false);
-    const [counter, setCounter] = useState(6)
+    const [counter, setCounter] = useState(6);
+    const [score, setScore] = useState(0);
 
     useEffect(() => {
         // const controller = new AbortController();
@@ -64,6 +65,7 @@ const HomePage = () => {
         if (!isGameInProgress) {
             await getImageFromPexelApi('random');
             activateListenFunction();
+            setScore(0)
             setIsGameInProgress(true);
         } else {
             activateListenFunction();
@@ -76,6 +78,7 @@ const HomePage = () => {
     const getImageFromPexelApi = async (query) => {
         console.log('start')
         try {
+            setScore((prev)=>prev + counter);
             const picturesList = await api.get(`/picture?query=${query}`)
             const picture = await pickRandomPicture(picturesList.data);
             setImageUrl(picture.src.original)
@@ -84,7 +87,6 @@ const HomePage = () => {
             const imagesListCurrent = imagesList
             imagesListCurrent.push(pictureObj)
             setImagesList(imagesListCurrent);
-
             setCounter(5)
         } catch (err) {
             console.log(err)
@@ -98,6 +100,9 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
+            {isGameInProgress &&
+            <Score score={score}/>
+            }
             {!isGameInProgress &&
             <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
             }
@@ -111,7 +116,7 @@ const HomePage = () => {
             {isGameInProgress &&
             <input
                 value={value}
-                // onChange={(event) => setValue(event.target.value)}
+                onChange={(event) => setValue(event.target.value)}
             />
             }
             {isGameInProgress &&
