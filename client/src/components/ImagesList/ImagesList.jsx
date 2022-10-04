@@ -7,7 +7,7 @@ export default function ImagesList({imagesList}) {
 
     console.log('i',imagesList)
     return (
-        <ImageList sx={{ width: 500, height: 450 }} cols={imagesList.length-1} rowHeight={164}>
+        <ImageList sx={{ width: 500, height: 450 ,marginLeft:10}} cols={imagesList.length-1} rowHeight={164}>
             {imagesList.map((item,index) => (
                 <ImageListItem key={item.src.small}>
                     {index!==imagesList.length-1 &&
@@ -20,6 +20,7 @@ export default function ImagesList({imagesList}) {
                     }
                     <p className={'image-title'}>{imagesList[index+1]?.imgTitle}</p>
                 </ImageListItem>
+
             ))}
         </ImageList>
     );
