@@ -1,20 +1,24 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import './ImagesList.css'
 
 export default function ImagesList({imagesList}) {
 
     console.log('i',imagesList)
     return (
         <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-            {imagesList.map((item) => (
-                <ImageListItem key={item.src.medium}>
+            {imagesList.map((item,index) => (
+                <ImageListItem key={item.src.small}>
+                    {index!==imagesList.length-1 &&
                     <img
                         src={`${item.src.small}?w=164&h=164&fit=crop&auto=format`}
                         srcSet={`${item.src.small}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                         alt={item.imgTitle}
                         loading="lazy"
                     />
+                    }
+                    <p className={'image-title'}>{imagesList[index+1]?.imgTitle}</p>
                 </ImageListItem>
             ))}
         </ImageList>

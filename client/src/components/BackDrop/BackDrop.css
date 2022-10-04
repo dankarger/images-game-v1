@@ -1,0 +1,13 @@
+.backdrop-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:3rem;
+
+}
+.message {
+    border:whitesmoke 1px dotted;
+    border-radius: 10px;
+    padding:3rem 12rem;
+}

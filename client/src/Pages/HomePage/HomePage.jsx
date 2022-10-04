@@ -30,6 +30,7 @@ const HomePage = () => {
     const [counter, setCounter] = useState(6);
     const [score, setScore] = useState(0);
     const [step, setStep] = useState(0);
+    const [totalSteps, setTotalSteps] = useState(3)
     const [showEndGame, setShowEndGame] = useState(false);
 
     useEffect(() => {
@@ -60,13 +61,17 @@ const HomePage = () => {
         }
     }, [isGameInProgress]);
 
-    useEffect(()=>{
-        if(step===3) {
+    useEffect(() => {
+        if (step === totalSteps) {
+            // let finaleImagesList = imagesList
+            // finaleImagesList.pop();
+            // setImagesList(finaleImagesList)
             setIsGameInProgress(false);
-            setShowEndGame(true)
+            setShowEndGame(true);
+            stop()
             console.log('game-over')
         }
-    },[step])
+    }, [step])
 
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async () => {
@@ -79,23 +84,34 @@ const HomePage = () => {
             activateListenFunction();
         }
     }
+
+    const startAgainFunction = async () => {
+            setShowEndGame(false);
+            setValue('')
+             setIsGameInProgress(false)
+            await handleStartButtonClick()
+    }
+
     const handleStopButton = () => {
         setIsGameInProgress(false);
 
     }
+
     const getImageFromPexelApi = async (query) => {
 
         try {
-            setScore((prev)=>prev + counter);
-            const picturesList = await api.get(`/picture?query=${query}`)
-            const picture = await pickRandomPicture(picturesList.data);
-            const pictureObj = {...picture, imgTitle: query}
-            setRandomPicture((prev) => (pictureObj))
-            const imagesListCurrent = imagesList
-            imagesListCurrent.push(pictureObj)
-            setImagesList(imagesListCurrent);
-            setCounter(5);
-            setStep((prev)=>prev+1)
+            if (step < totalSteps) {
+                setScore((prev) => prev + counter);
+                setStep((prev) => prev + 1)
+                const picturesList = await api.get(`/picture?query=${query}`)
+                const picture = await pickRandomPicture(picturesList.data);
+                const pictureObj = {...picture, imgTitle: query}
+                setRandomPicture((prev) => (pictureObj))
+                const imagesListCurrent = imagesList
+                imagesListCurrent.push(pictureObj)
+                setImagesList(imagesListCurrent);
+                setCounter(5);
+            }
         } catch (err) {
             console.log(err)
         }
@@ -108,10 +124,10 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            {step !==0 &&
+            {step !== 0 &&
             <Score score={score}/>
             }
-            {!isGameInProgress &&
+            {!isGameInProgress && !showEndGame &&
             <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
             }
 
@@ -130,17 +146,18 @@ const HomePage = () => {
             {isGameInProgress &&
             // <textarea
 
-                <div className='buttons-div'>
+            <div className='buttons-div'>
                 <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop}/>
                 <BasicButton label='STOP' theme="contained" color={'error'} onclick={handleStopButton}/>
-                </div>
+            </div>
             }
             {/*<button onMouseDown={listen} onMouseUp={stop}>*/}
             {/*    🎤*/}
             {/*</button>*/}
             {/*{listening && <div>Go ahead I'm listening</div>}*/}
             <div className='backdrop-container'>
-                 <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}/>
+                <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}
+                          startAgainFunction={startAgainFunction}/>
             </div>
 
         </div>
