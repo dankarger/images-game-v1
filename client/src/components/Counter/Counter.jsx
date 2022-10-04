@@ -9,12 +9,13 @@ const Counter = ({count}) => {
 
     useEffect(() => {
         if (count >= 0) {
-            setCounter(count)
+
             player(soundList['click'])
+            setCounter(count)
         }
         else {
             setCounter(0);
-            player(soundList['click'])
+
         }
     }, [count])
 
