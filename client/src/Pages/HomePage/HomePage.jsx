@@ -3,20 +3,18 @@ import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
 import {pickRandomPicture} from "../../utils/utils";
 import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
-import Picture from "../../components/Picture/Picture";
 import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
 import Score from "../../components/Score/Score";
+import Backdrop from "../../components/BackDrop/BackDrop";
 
 import './HomePage.css'
 
 
 const HomePage = () => {
-    const [imageUrl, setImageUrl] = useState('');
     const [randomPicture, setRandomPicture] = useState({
         src: {},
         title: 'random',
-
     });
     const [imagesList, setImagesList] = useState([]);
     const [value, setValue] = useState('');
@@ -31,6 +29,8 @@ const HomePage = () => {
     const [isGameInProgress, setIsGameInProgress] = useState(false);
     const [counter, setCounter] = useState(6);
     const [score, setScore] = useState(0);
+    const [step, setStep] = useState(0);
+    const [showEndGame, setShowEndGame] = useState(false);
 
     useEffect(() => {
         // const controller = new AbortController();
@@ -58,7 +58,15 @@ const HomePage = () => {
                 clearInterval(interval)
             }
         }
-    }, [isGameInProgress])
+    }, [isGameInProgress]);
+
+    useEffect(()=>{
+        if(step===3) {
+            setIsGameInProgress(false);
+            setShowEndGame(true)
+            console.log('game-over')
+        }
+    },[step])
 
     // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async () => {
@@ -76,18 +84,18 @@ const HomePage = () => {
 
     }
     const getImageFromPexelApi = async (query) => {
-        console.log('start')
+
         try {
             setScore((prev)=>prev + counter);
             const picturesList = await api.get(`/picture?query=${query}`)
             const picture = await pickRandomPicture(picturesList.data);
-            setImageUrl(picture.src.original)
             const pictureObj = {...picture, imgTitle: query}
             setRandomPicture((prev) => (pictureObj))
             const imagesListCurrent = imagesList
             imagesListCurrent.push(pictureObj)
             setImagesList(imagesListCurrent);
-            setCounter(5)
+            setCounter(5);
+            setStep((prev)=>prev+1)
         } catch (err) {
             console.log(err)
         }
@@ -100,7 +108,7 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            {isGameInProgress &&
+            {step !==0 &&
             <Score score={score}/>
             }
             {!isGameInProgress &&
@@ -131,9 +139,9 @@ const HomePage = () => {
             {/*    🎤*/}
             {/*</button>*/}
             {/*{listening && <div>Go ahead I'm listening</div>}*/}
-
-
-
+            <div className='backdrop-container'>
+                 <Backdrop score={score} showEndGame={showEndGame}/>
+            </div>
 
         </div>
     )

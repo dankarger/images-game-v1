@@ -23,3 +23,8 @@
     gap:20px;
 
 }
+.backdrop-container {
+    justify-self: end;
+    position: absolute;
+    bottom:7rem;
+}
