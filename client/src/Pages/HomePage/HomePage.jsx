@@ -140,7 +140,7 @@ const HomePage = () => {
             {/*</button>*/}
             {/*{listening && <div>Go ahead I'm listening</div>}*/}
             <div className='backdrop-container'>
-                 <Backdrop score={score} showEndGame={showEndGame}/>
+                 <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}/>
             </div>
 
         </div>

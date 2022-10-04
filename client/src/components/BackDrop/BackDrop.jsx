@@ -3,8 +3,9 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import {useEffect, useState} from "react";
+import ImagesList from "../ImagesList/ImagesList";
 
-export default function SimpleBackdrop({score, showEndGame}) {
+export default function SimpleBackdrop({score, showEndGame, imagesList}) {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
         setOpen(false);
@@ -34,8 +35,12 @@ export default function SimpleBackdrop({score, showEndGame}) {
                 onClick={handleClose}
             >
                 {/*<CircularProgress color="inherit" />*/}
-                Game Over
-                Your Score : {score}
+                <div className="message">
+                    <h1>Game Over</h1>
+                    <h2>Your Score : {score}</h2>
+                </div>
+                <ImagesList imagesList={imagesList}/>
+
             </Backdrop>
         </div>
     );
