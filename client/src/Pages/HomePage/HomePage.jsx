@@ -49,12 +49,14 @@ const HomePage = () => {
         }
     }, [value]);
 
-    useEffect(() => {
-        if (isGameInProgress) {
-            const interval = setInterval(() => {
-                setCounter((prev) => prev - 1)
-            }, 1000)
 
+
+    useEffect(() => {
+        if (isGameInProgress ) {
+            const interval = setInterval(() => {
+                setCounter((prev) => prev - 1);
+            }, 1000)
+            console.log('count',counter)
             return () => {
                 clearInterval(interval)
             }
@@ -159,7 +161,6 @@ const HomePage = () => {
                 <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}
                           startAgainFunction={startAgainFunction}/>
             </div>
-
         </div>
     )
 }
