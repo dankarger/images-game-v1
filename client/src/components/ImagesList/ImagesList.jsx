@@ -6,15 +6,16 @@ import './ImagesList.css'
 export default function ImagesList({imagesList}) {
 
     const numberOfCol = imagesList.length===4? 3 : 5;
+    if(!imagesList) return null;
     return (
         <ImageList sx={{ width: 500, height: 450 }} cols={numberOfCol} rowHeight={164}>
             {imagesList.map((item,index) => (
-                <ImageListItem key={item.src.small}>
+                <ImageListItem key={item?.src?.small}>
                     {index!==imagesList.length-1 &&
                     <img
-                        src={`${item.src.small}?w=164&h=164&fit=crop&auto=format`}
-                        srcSet={`${item.src.small}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                        alt={item.imgTitle}
+                        src={`${item?.src?.small}?w=164&h=164&fit=crop&auto=format`}
+                        srcSet={`${item?.src?.small}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                        alt={item?.imgTitle}
                         loading="lazy"
                     />
                     }
