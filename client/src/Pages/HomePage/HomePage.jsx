@@ -138,6 +138,7 @@ const HomePage = () => {
                 // setCounter(5);
                 counter.current = 5;
                 setValue('');
+                setTempValue('');
             }
         } catch (err) {
             console.log(err)
@@ -150,13 +151,21 @@ const HomePage = () => {
     }
 
     const handleInputChangeValue = (e) => {
-        if (e.key === 'Enter') {
-            setValue(tempValue);
-            setTempValue('');
-        }
+
+        console.log(e.target.value)
         setTempValue(e.target.value)
     }
+    const handleOnKeyDown=(e)=>{
+        console.log('temp',tempValue)
+        if ( e.key === "Enter") {
+            console.log('enter')
+            setTimeout(()=>{
+                setValue(tempValue);
+                setTempValue('');
+            },500)
 
+        }
+    }
     return (
         <div className='home-page'>
             {step !== 0 &&
@@ -176,7 +185,7 @@ const HomePage = () => {
 
             {isGameInProgress &&
             <div className="main-container">
-                <PictureContainer pictureObject={randomPicture}/>
+                <PictureContainer pictureObject={randomPicture} />
                 <Counter count={counter.current} render={render}/>
             </div>
             }
@@ -185,6 +194,7 @@ const HomePage = () => {
                 ref={inputRef}
                 value={tempValue}
                 onChange={handleInputChangeValue}
+                onKeyDown={handleOnKeyDown}
             />
             }
             {isGameInProgress &&

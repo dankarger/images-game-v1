@@ -3,10 +3,14 @@ import Picture from '../Picture/Picture'
 import Counter from "../Counter/Counter";
 
 const PictureContainer = ({pictureObject}) => {
+
+    if(!pictureObject) return null;
+
     const {
         imgTitle, photographer, photographer_url
     } = pictureObject;
-    const url = pictureObject?.src.large
+    const url = pictureObject?.src.large || undefined;
+
     if (!url) return null;
     return (
         <div className='picture-container'>
