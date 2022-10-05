@@ -1,4 +1,4 @@
 export const soundList = {
-    click: './sounds/retro_click.wav',
+    click: './sounds/switch.wav',
     secondClick: './sounds/province_enemy_click.wav',
 }

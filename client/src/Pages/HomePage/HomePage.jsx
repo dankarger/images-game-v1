@@ -24,12 +24,13 @@ const HomePage = () => {
         onResult: (result) => {
             setTimeout(() => {
                 setValue(result);
+                setTempValue(result)
             }, 500)
 
         },
     });
     const [isGameInProgress, setIsGameInProgress] = useState(false);
-    const [counter, setCounter] = useState(6);
+    // const [counter, setCounter] = useState(6);
     const [score, setScore] = useState(0);
     const [step, setStep] = useState(0);
     const [totalSteps, setTotalSteps] = useState(4)
@@ -37,7 +38,8 @@ const HomePage = () => {
 
     let interval = useRef();
     const inputRef = useRef(null);
-
+    const counter = useRef(6);
+    const [render, setRender] = useState(true)
     useEffect(() => {
         // const controller = new AbortController();
         // const signal = controller.signal;
@@ -57,30 +59,33 @@ const HomePage = () => {
 
 
     useEffect(() => {
-        if (isGameInProgress ) {
+        if (isGameInProgress && counter.current > 0) {
              interval.current = setInterval(() => {
-                setCounter((prev) => prev - 1);
-                 console.log('count',counter)
+                 player(soundList['click'])
+                // setCounter((prev) => prev - 1);
+                 counter.current -=1;
+                 console.log('count',counter.current);
+
+                 setRender((prev)=>!prev)
             }, 1000)
 
         }
             else {
-                clearInterval(interval.current)
+                clearInterval(interval.current);
+
+
             }
 
             return () => {
-                clearInterval(interval.current)
+                clearInterval(interval.current);
+
             }
 
     }, [isGameInProgress]);
 
     useEffect(() => {
         if (step === totalSteps) {
-            // let finaleImagesList = imagesList
-            // finaleImagesList.pop();
-            // setImagesList(finaleImagesList)
             setIsGameInProgress(false);
-
             setShowEndGame(true);
             stop()
             setValue('')
@@ -88,7 +93,6 @@ const HomePage = () => {
         }
     }, [step])
 
-    // const [imgTitle, setImgTitle] = useState('test');
     const handleStartButtonClick = async () => {
         if (!isGameInProgress) {
             await getImageFromPexelApi(pickRandomSubject());
@@ -107,7 +111,6 @@ const HomePage = () => {
             setShowEndGame(false);
             setValue('')
              setIsGameInProgress(false)
-            // await handleStartButtonClick()
     }
 
     const handleStopButton = () => {
@@ -119,7 +122,7 @@ const HomePage = () => {
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps ) {
-                setScore((prev) => prev + counter);
+                setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
                 const picture = await pickRandomPicture(picturesList.data);
@@ -128,7 +131,8 @@ const HomePage = () => {
                 const imagesListCurrent = imagesList
                 imagesListCurrent.push(pictureObj)
                 setImagesList(imagesListCurrent);
-                setCounter(5);
+                // setCounter(5);
+                counter.current = 5;
                 setValue('');
             }
         } catch (err) {
@@ -146,7 +150,7 @@ const HomePage = () => {
             setValue(tempValue);
             setTempValue('');
         }
-        setTempValue(prev=>prev + e.target.value)
+        setTempValue(e.target.value)
     }
 
     return (
@@ -164,7 +168,7 @@ const HomePage = () => {
             {isGameInProgress &&
             <div className="main-container">
                 <PictureContainer pictureObject={randomPicture}/>
-                <Counter count={counter}/>
+                <Counter count={counter.current} render={render}/>
             </div>
             }
             {isGameInProgress &&
