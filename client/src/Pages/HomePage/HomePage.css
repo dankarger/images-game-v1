@@ -25,8 +25,12 @@
 }
 .backdrop-container {
     justify-self: end;
-    position: absolute;
+    /*position: absolute;*/
     bottom:7rem;
+
+    /*width:100%;*/
+    /*height: calc(100% - 200px);*/
+    /*top:200px;*/
 }
 .start-button-container {
     position: absolute;

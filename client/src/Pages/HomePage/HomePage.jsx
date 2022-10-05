@@ -65,7 +65,7 @@ const HomePage = () => {
                 interval.current = setInterval(() => {
                     player(soundList['click'])
                     // setCounter((prev) => prev - 1);
-                    counter.current -= 1;
+                    if(counter.current>0) counter.current -= 1;
                     console.log('count', counter.current);
                     setRender((prev) => !prev)
                 }, 1000)
@@ -162,7 +162,7 @@ const HomePage = () => {
             {step !== 0 &&
                 <div className="score-div">
                     <Score score={score}/>
-                    <ImagesCounter step={step} stepsTotal={totalSteps} />
+                    <ImagesCounter step={step} stepsTotal={totalSteps} isGameInProgress={isGameInProgress}/>
                 </div>
             }
             {!isGameInProgress && !showEndGame &&

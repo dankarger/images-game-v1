@@ -43,6 +43,7 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                     <div className="message">
                         <h1>Game Over</h1>
                         <h2>Your Score : {score}</h2>
+                        <p>click anywhere to continue</p>
                     </div>
                     <ImagesList imagesList={imagesList}/>
 
