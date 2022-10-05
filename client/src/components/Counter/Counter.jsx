@@ -14,7 +14,6 @@ const Counter = ({count, render}) => {
         }
         else {
             setCounter(0);
-
         }
     }, [count, render])
 
@@ -22,7 +21,7 @@ const Counter = ({count, render}) => {
     if (counter < 0) setCounter(0)
     return (
         <div className='counter-div'>
-            <h2 className='counter'>{counter}</h2>
+            <h2 className='counter'>Points: {counter}</h2>
         </div>
     )
 }

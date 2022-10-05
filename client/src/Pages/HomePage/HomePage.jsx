@@ -6,6 +6,7 @@ import {useSpeechRecognition} from "../../utils/useSpeechRecognition"
 import PictureContainer from "../../components/PictureContainer/PictureContainer";
 import Counter from "../../components/Counter/Counter";
 import Score from "../../components/Score/Score";
+import ImagesCounter from "../../components/Counter/ImagesCounter";
 import Backdrop from "../../components/BackDrop/BackDrop";
 import {player} from "../../components/SoundPlayer/player";
 import {soundList} from "../../components/constants/soundsList";
@@ -159,7 +160,10 @@ const HomePage = () => {
     return (
         <div className='home-page'>
             {step !== 0 &&
-            <Score score={score}/>
+                <div className="score-div">
+                    <Score score={score}/>
+                    <ImagesCounter step={step} stepsTotal={totalSteps} />
+                </div>
             }
             {!isGameInProgress && !showEndGame &&
             <div className="start-button-container">
@@ -191,10 +195,7 @@ const HomePage = () => {
                 <BasicButton label='STOP' theme="contained" color={'error'} onclick={handleStopButton}/>
             </div>
             }
-            {/*<button onMouseDown={listen} onMouseUp={stop}>*/}
-            {/*    🎤*/}
-            {/*</button>*/}
-            {/*{listening && <div>Go ahead I'm listening</div>}*/}
+
             <div className='backdrop-container'>
                 <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}
                           startAgainFunction={startAgainFunction}/>
