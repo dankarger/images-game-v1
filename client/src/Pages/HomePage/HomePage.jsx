@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import BasicButton from "../../components/Button/Button";
 import api from "../../Api/Api";
 import {pickRandomPicture, pickRandomSubject} from "../../utils/utils";
@@ -19,6 +19,7 @@ const HomePage = () => {
     });
     const [imagesList, setImagesList] = useState([]);
     const [value, setValue] = useState('');
+    const [tempValue, setTempValue] = useState('');
     const {listen, listening, stop} = useSpeechRecognition({
         onResult: (result) => {
             setTimeout(() => {
@@ -33,6 +34,9 @@ const HomePage = () => {
     const [step, setStep] = useState(0);
     const [totalSteps, setTotalSteps] = useState(4)
     const [showEndGame, setShowEndGame] = useState(false);
+
+    let interval = useRef();
+    const inputRef = useRef(null);
 
     useEffect(() => {
         // const controller = new AbortController();
@@ -54,14 +58,20 @@ const HomePage = () => {
 
     useEffect(() => {
         if (isGameInProgress ) {
-            const interval = setInterval(() => {
+             interval.current = setInterval(() => {
                 setCounter((prev) => prev - 1);
+                 console.log('count',counter)
             }, 1000)
-            console.log('count',counter)
-            return () => {
-                clearInterval(interval)
-            }
+
         }
+            else {
+                clearInterval(interval.current)
+            }
+
+            return () => {
+                clearInterval(interval.current)
+            }
+
     }, [isGameInProgress]);
 
     useEffect(() => {
@@ -70,6 +80,7 @@ const HomePage = () => {
             // finaleImagesList.pop();
             // setImagesList(finaleImagesList)
             setIsGameInProgress(false);
+
             setShowEndGame(true);
             stop()
             setValue('')
@@ -84,6 +95,7 @@ const HomePage = () => {
             activateListenFunction();
             setScore(0)
             setIsGameInProgress(true);
+            setTimeout(()=>{inputRef.current.focus()},10);
 
         } else {
             activateListenFunction();
@@ -95,7 +107,7 @@ const HomePage = () => {
             setShowEndGame(false);
             setValue('')
              setIsGameInProgress(false)
-            await handleStartButtonClick()
+            // await handleStartButtonClick()
     }
 
     const handleStopButton = () => {
@@ -129,6 +141,14 @@ const HomePage = () => {
         listen()
     }
 
+    const handleInputChangeValue=(e)=>{
+        if(e.key === 'Enter'){
+            setValue(tempValue);
+            setTempValue('');
+        }
+        setTempValue(prev=>prev + e.target.value)
+    }
+
     return (
         <div className='home-page'>
             {step !== 0 &&
@@ -149,8 +169,9 @@ const HomePage = () => {
             }
             {isGameInProgress &&
             <input
-                value={value}
-                onChange={(event) =>  setValue(event.target.value)}
+                ref={inputRef}
+                value={tempValue}
+                onChange={handleInputChangeValue}
             />
             }
             {isGameInProgress &&

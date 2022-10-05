@@ -6,7 +6,7 @@ const PictureContainer = ({pictureObject}) => {
     const {
         imgTitle, photographer, photographer_url
     } = pictureObject;
-    const url = pictureObject.src.large
+    const url = pictureObject?.src.large
     if (!url) return null;
     return (
         <div className='picture-container'>
