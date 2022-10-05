@@ -11,6 +11,7 @@ import Backdrop from "../../components/BackDrop/BackDrop";
 import {player} from "../../components/SoundPlayer/player";
 import {soundList} from "../../components/constants/soundsList";
 import BasicSelect from "../../components/Select/Select";
+import CustomizedSwitches from "../../components/Switch/Switch";
 import './HomePage.css'
 
 const HomePage = () => {
@@ -42,6 +43,8 @@ const HomePage = () => {
     const inputRef = useRef(null);
     const counter = useRef(6);
     const [render, setRender] = useState(true)
+    let sound = useRef(true)
+
     useEffect(() => {
         // const controller = new AbortController();
         // const signal = controller.signal;
@@ -63,10 +66,10 @@ const HomePage = () => {
         if (isGameInProgress) {
             if (counter.current > 0) {
                 interval.current = setInterval(() => {
-                    player(soundList['click'])
+                    player(soundList['click'],sound.current)
                     // setCounter((prev) => prev - 1);
                     if(counter.current>0) counter.current -= 1;
-                    console.log('count', counter.current);
+
                     setRender((prev) => !prev)
                 }, 1000)
             } else {
@@ -107,7 +110,7 @@ const HomePage = () => {
         } else {
             activateListenFunction();
         }
-        player(soundList['secondClick'])
+        player(soundList['secondClick'], sound.current)
     }
 
     const startAgainFunction = async () => {
@@ -118,14 +121,15 @@ const HomePage = () => {
 
     const handleStopButton = () => {
         setIsGameInProgress(false);
-        player(soundList['secondClick'])
+        player(soundList['secondClick'],sound.current)
 
     }
 
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps) {
-                player(soundList['paper'])
+                if(query.includes())
+                player(soundList['paper'],sound.current)
                 setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
@@ -142,6 +146,7 @@ const HomePage = () => {
             }
         } catch (err) {
             console.log(err)
+            setErrorMessage(err.message)
         }
 
     }
@@ -151,14 +156,13 @@ const HomePage = () => {
     }
 
     const handleInputChangeValue = (e) => {
-
-        console.log(e.target.value)
         setTempValue(e.target.value)
     }
     const handleOnKeyDown=(e)=>{
-        console.log('temp',tempValue)
+
         if ( e.key === "Enter") {
             console.log('enter')
+            e.preventDefault()
             setTimeout(()=>{
                 setValue(tempValue);
                 setTempValue('');
@@ -166,8 +170,18 @@ const HomePage = () => {
 
         }
     }
+    const handleSoundSwitchChange=(e)=>{
+        //
+        // setIsMute(prev=>!prev)
+        sound.current = e.target.checked;
+        console.log('mute', sound.current)
+    }
+
     return (
         <div className='home-page'>
+            <div className="sound-option-div">
+            <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange} />
+            </div>
             {step !== 0 &&
                 <div className="score-div">
                     <Score score={score}/>
@@ -190,12 +204,15 @@ const HomePage = () => {
             </div>
             }
             {isGameInProgress &&
-            <input
-                ref={inputRef}
-                value={tempValue}
-                onChange={handleInputChangeValue}
-                onKeyDown={handleOnKeyDown}
-            />
+            <form action="#">
+                <input
+                    ref={inputRef}
+                    value={tempValue}
+                    onChange={handleInputChangeValue}
+                    onKeyDown={handleOnKeyDown}
+                />
+            </form>
+
             }
             {isGameInProgress &&
             // <textarea
@@ -210,6 +227,7 @@ const HomePage = () => {
                 <Backdrop score={score} showEndGame={showEndGame} imagesList={imagesList}
                           startAgainFunction={startAgainFunction}/>
             </div>
+            {errorMessage && <h4>{errorMessage}</h4>}
         </div>
     )
 }

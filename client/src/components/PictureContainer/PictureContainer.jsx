@@ -9,7 +9,7 @@ const PictureContainer = ({pictureObject}) => {
     const {
         imgTitle, photographer, photographer_url
     } = pictureObject;
-    const url = pictureObject?.src.large || undefined;
+    const url = pictureObject?.src?.large || undefined;
 
     if (!url) return null;
     return (

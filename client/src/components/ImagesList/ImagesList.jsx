@@ -5,7 +5,6 @@ import './ImagesList.css'
 
 export default function ImagesList({imagesList}) {
 
-    console.log('i',imagesList);
     const numberOfCol = imagesList.length===4? 3 : 5;
     return (
         <ImageList sx={{ width: 500, height: 450 }} cols={numberOfCol} rowHeight={164}>

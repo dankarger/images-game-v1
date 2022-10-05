@@ -6,10 +6,10 @@ import './Counter.css'
 
 const Counter = ({count, render}) => {
     const [counter, setCounter] = useState(Number)
-    console.log('cou',count)
+
     useEffect(() => {
         if (count >= 0) {
-            // player(soundList['click'])
+
             setCounter(count)
         }
         else {
