@@ -1,4 +1,4 @@
-import './province_enemy_click.wav'
+
 
 export  const player = async (sound, soundOn)=>{
     if(soundOn){

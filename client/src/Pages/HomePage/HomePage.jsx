@@ -129,7 +129,7 @@ const HomePage = () => {
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps) {
-                if(query.includes())
+
                 player(soundList['paper'],sound.current)
                 setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
