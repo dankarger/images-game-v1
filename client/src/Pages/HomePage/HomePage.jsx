@@ -35,6 +35,7 @@ const HomePage = () => {
     const [step, setStep] = useState(0);
     const [totalSteps, setTotalSteps] = useState(4)
     const [showEndGame, setShowEndGame] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(undefined)
 
     let interval = useRef();
     const inputRef = useRef(null);
@@ -59,23 +60,24 @@ const HomePage = () => {
 
 
     useEffect(() => {
-        if (isGameInProgress && counter.current > 0) {
-             interval.current = setInterval(() => {
-                 player(soundList['click'])
-                // setCounter((prev) => prev - 1);
-                 counter.current -=1;
-                 console.log('count',counter.current);
-
-                 setRender((prev)=>!prev)
-            }, 1000)
+        if (isGameInProgress ) {
+            if(counter.current > 0){
+                interval.current = setInterval(() => {
+                    player(soundList['click'])
+                    // setCounter((prev) => prev - 1);
+                    counter.current -=1;
+                    console.log('count',counter.current);
+                    setRender((prev)=>!prev)
+                }, 1000)
+            }else {
+                clearInterval(interval.current);
+                counter.current = 0;
+            }
 
         }
             else {
                 clearInterval(interval.current);
-
-
             }
-
             return () => {
                 clearInterval(interval.current);
 
@@ -122,6 +124,7 @@ const HomePage = () => {
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps ) {
+                player(soundList['paper'])
                 setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
