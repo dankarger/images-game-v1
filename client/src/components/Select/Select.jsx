@@ -18,7 +18,7 @@ export default function BasicSelect({setTotalStep}) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Steps</InputLabel>
+                <InputLabel id="demo-simple-select-label">Images</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"

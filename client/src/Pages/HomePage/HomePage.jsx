@@ -45,7 +45,7 @@ const HomePage = () => {
         // const controller = new AbortController();
         // const signal = controller.signal;
         let isCancel = false;
-        if (!isCancel &&isGameInProgress && value) {
+        if (!isCancel && isGameInProgress && value) {
             // setTimeout(()=>{
             getImageFromPexelApi(value).then(res => console.log('res', res))
             // },1000)
@@ -58,30 +58,28 @@ const HomePage = () => {
     }, [value]);
 
 
-
     useEffect(() => {
-        if (isGameInProgress ) {
-            if(counter.current > 0){
+        if (isGameInProgress) {
+            if (counter.current > 0) {
                 interval.current = setInterval(() => {
                     player(soundList['click'])
                     // setCounter((prev) => prev - 1);
-                    counter.current -=1;
-                    console.log('count',counter.current);
-                    setRender((prev)=>!prev)
+                    counter.current -= 1;
+                    console.log('count', counter.current);
+                    setRender((prev) => !prev)
                 }, 1000)
-            }else {
+            } else {
                 clearInterval(interval.current);
                 counter.current = 0;
             }
 
+        } else {
+            clearInterval(interval.current);
         }
-            else {
-                clearInterval(interval.current);
-            }
-            return () => {
-                clearInterval(interval.current);
+        return () => {
+            clearInterval(interval.current);
 
-            }
+        }
 
     }, [isGameInProgress]);
 
@@ -101,7 +99,9 @@ const HomePage = () => {
             activateListenFunction();
             setScore(0)
             setIsGameInProgress(true);
-            setTimeout(()=>{inputRef.current.focus()},10);
+            setTimeout(() => {
+                inputRef.current.focus()
+            }, 10);
 
         } else {
             activateListenFunction();
@@ -110,9 +110,9 @@ const HomePage = () => {
     }
 
     const startAgainFunction = async () => {
-            setShowEndGame(false);
-            setValue('')
-             setIsGameInProgress(false)
+        setShowEndGame(false);
+        setValue('')
+        setIsGameInProgress(false)
     }
 
     const handleStopButton = () => {
@@ -123,7 +123,7 @@ const HomePage = () => {
 
     const getImageFromPexelApi = async (query) => {
         try {
-            if (step <= totalSteps ) {
+            if (step <= totalSteps) {
                 player(soundList['paper'])
                 setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
@@ -148,8 +148,8 @@ const HomePage = () => {
         listen()
     }
 
-    const handleInputChangeValue=(e)=>{
-        if(e.key === 'Enter'){
+    const handleInputChangeValue = (e) => {
+        if (e.key === 'Enter') {
             setValue(tempValue);
             setTempValue('');
         }
@@ -162,10 +162,12 @@ const HomePage = () => {
             <Score score={score}/>
             }
             {!isGameInProgress && !showEndGame &&
-                <div className="start-button-container">
-                    <BasicSelect setTotalStep={setTotalSteps} />
-                    <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
-                </div>
+            <div className="start-button-container">
+                <p>How many images? </p>
+                <BasicSelect setTotalStep={setTotalSteps}/>
+                <br/>
+                <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
+            </div>
             }
 
             {isGameInProgress &&
