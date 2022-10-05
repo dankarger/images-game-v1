@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import {useEffect, useState} from "react";
 import ImagesList from "../ImagesList/ImagesList";
+import Credits from "../Credits/Credits";
 import './BackDrop.css'
 
 export default function SimpleBackdrop({score, showEndGame, imagesList, startAgainFunction}) {
@@ -46,7 +47,10 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                         <p>click anywhere to continue</p>
                     </div>
                     <ImagesList imagesList={imagesList}/>
-
+                    <div className="credits-div">
+                        <h1>credit:</h1>
+                        <Credits imageList={imagesList} />
+                    </div>
                 </div>
 
             </Backdrop>

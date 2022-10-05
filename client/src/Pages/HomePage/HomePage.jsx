@@ -116,7 +116,8 @@ const HomePage = () => {
     const startAgainFunction = async () => {
         setShowEndGame(false);
         setValue('')
-        setIsGameInProgress(false)
+        setIsGameInProgress(false);
+        setImagesList([])
     }
 
     const handleStopButton = () => {
