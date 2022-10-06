@@ -24,6 +24,7 @@ const HomePage = () => {
     const [tempValue, setTempValue] = useState('');
     const {listen, listening, stop} = useSpeechRecognition({
         onResult: (result) => {
+            setScore((prev) => prev + counter.current);
             setTimeout(() => {
                 setValue(result);
                 setTempValue(result)
@@ -135,7 +136,7 @@ const HomePage = () => {
         try {
             if (step <= totalSteps) {
                 player(soundList['paper'],sound.current)
-                setScore((prev) => prev + counter.current);
+
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
                 const picture = await pickRandomPicture(picturesList.data);
@@ -167,7 +168,8 @@ const HomePage = () => {
 
         if ( e.key === "Enter") {
             console.log('enter')
-            e.preventDefault()
+            e.preventDefault();
+            setScore((prev) => prev + counter.current);
             setTimeout(()=>{
                 setValue(tempValue);
                 setTempValue('');
