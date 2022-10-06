@@ -117,7 +117,12 @@ const HomePage = () => {
         setShowEndGame(false);
         setValue('')
         setIsGameInProgress(false);
-        setImagesList([])
+        setTempValue('')
+        setImagesList([]);
+        setStep(0);
+        setTotalSteps(4);
+        setScore(0);
+        stop()
     }
 
     const handleStopButton = () => {
@@ -129,7 +134,6 @@ const HomePage = () => {
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps) {
-
                 player(soundList['paper'],sound.current)
                 setScore((prev) => prev + counter.current);
                 setStep((prev) => prev + 1)
@@ -191,7 +195,7 @@ const HomePage = () => {
             }
             {!isGameInProgress && !showEndGame &&
             <div className="start-button-container">
-                <p>How many images? </p>
+                <p>How many images?  </p>
                 <BasicSelect setTotalStep={setTotalSteps}/>
                 <br/>
                 <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>

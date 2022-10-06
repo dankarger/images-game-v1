@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect({setTotalStep}) {
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState(4);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -18,12 +18,12 @@ export default function BasicSelect({setTotalStep}) {
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Images</InputLabel>
+                <InputLabel id="demo-simple-select-label"> </InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={value}
-                    label="Step"
+                    // label="Step"
                     onChange={handleChange}
                 >
                     <MenuItem value={4}>Three</MenuItem>
