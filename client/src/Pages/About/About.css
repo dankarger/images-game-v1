@@ -1,9 +1,52 @@
 .about-page {
+    font-family: 'Roboto', sans-serif;
     width:100%;
     height: calc(100% - 112px);
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
-    gap:1rem;
+    gap:4vh;
+}
+.about-content {
+    height: calc(100% - 112px);
+    display: flex;
+    align-items: start;
+    justify-items: center;
+    flex-direction: column;
+    gap:1vh;
+
+}
+.about-h1,.about-h2, .about-h3 {
+    display: flex;
+    align-items: center;
+
+}
+.about-h3 {
+    color: #282c34;
+}
+.icon {
+    margin-right:4px;
+    color: #1b728d;
+    transition: 1s;
+}
+.icon:hover {
+  transform: rotate(45deg);
+    transition: 500ms;
+}
+.about-p {
+    justify-self: flex-end;
+
+    color:#1b728d;
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    color:#61dafb;
+    transition: 500ms;
 }
