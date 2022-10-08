@@ -1,0 +1,17 @@
+.instructions {
+ display: flex;
+   /*align-self: start;*/
+   /*justify-self: end;*/
+    align-items: flex-start;
+    justify-content: start;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px grey solid;
+    padding:3rem;
+   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+}
+
+h5 {
+   margin:14px;
+}

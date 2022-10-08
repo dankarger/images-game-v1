@@ -11,6 +11,7 @@ import Backdrop from "../../components/BackDrop/BackDrop";
 import {player} from "../../components/SoundPlayer/player";
 import {soundList} from "../../components/constants/soundsList";
 import BasicSelect from "../../components/Select/Select";
+import Instructions from "../../components/Instructions/Instructions";
 import CustomizedSwitches from "../../components/Switch/Switch";
 import './HomePage.css'
 
@@ -67,9 +68,9 @@ const HomePage = () => {
         if (isGameInProgress) {
             if (counter.current > 0) {
                 interval.current = setInterval(() => {
-                    player(soundList['click'],sound.current)
+                    player(soundList['click'], sound.current)
                     // setCounter((prev) => prev - 1);
-                    if(counter.current>0) counter.current -= 1;
+                    if (counter.current > 0) counter.current -= 1;
 
                     setRender((prev) => !prev)
                 }, 1000)
@@ -128,14 +129,14 @@ const HomePage = () => {
 
     const handleStopButton = () => {
         setIsGameInProgress(false);
-        player(soundList['secondClick'],sound.current)
+        player(soundList['secondClick'], sound.current)
 
     }
 
     const getImageFromPexelApi = async (query) => {
         try {
             if (step <= totalSteps) {
-                player(soundList['paper'],sound.current)
+                player(soundList['paper'], sound.current)
 
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
@@ -164,20 +165,20 @@ const HomePage = () => {
     const handleInputChangeValue = (e) => {
         setTempValue(e.target.value)
     }
-    const handleOnKeyDown=(e)=>{
+    const handleOnKeyDown = (e) => {
 
-        if ( e.key === "Enter") {
+        if (e.key === "Enter") {
             console.log('enter')
             e.preventDefault();
             setScore((prev) => prev + counter.current);
-            setTimeout(()=>{
+            setTimeout(() => {
                 setValue(tempValue);
                 setTempValue('');
-            },500)
+            }, 500)
 
         }
     }
-    const handleSoundSwitchChange=(e)=>{
+    const handleSoundSwitchChange = (e) => {
         //
         // setIsMute(prev=>!prev)
         sound.current = e.target.checked;
@@ -187,17 +188,17 @@ const HomePage = () => {
     return (
         <div className='home-page'>
             <div className="sound-option-div">
-            <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange} />
+                <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange}/>
             </div>
             {step !== 0 &&
-                <div className="score-div">
-                    <Score score={score}/>
-                    <ImagesCounter step={step} stepsTotal={totalSteps} isGameInProgress={isGameInProgress}/>
-                </div>
+            <div className="score-div">
+                <Score score={score}/>
+                <ImagesCounter step={step} stepsTotal={totalSteps} isGameInProgress={isGameInProgress}/>
+            </div>
             }
             {!isGameInProgress && !showEndGame &&
             <div className="start-button-container">
-                <p>How many images?  </p>
+                <p>How many images? </p>
                 <BasicSelect setTotalStep={setTotalSteps}/>
                 <br/>
                 <BasicButton label='START' theme={"outlined"} onclick={() => handleStartButtonClick('random')}/>
@@ -206,7 +207,7 @@ const HomePage = () => {
 
             {isGameInProgress &&
             <div className="main-container">
-                <PictureContainer pictureObject={randomPicture} />
+                <PictureContainer pictureObject={randomPicture}/>
                 <Counter count={counter.current} render={render}/>
             </div>
             }
@@ -221,6 +222,7 @@ const HomePage = () => {
             </form>
 
             }
+            {!isGameInProgress && !showEndGame && <Instructions/>}
             {isGameInProgress &&
             // <textarea
 

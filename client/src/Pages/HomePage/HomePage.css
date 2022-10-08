@@ -1,6 +1,4 @@
 .home-page {
-
-
     width:100%;
     height: calc(100% - 112px);
     display: flex;
@@ -35,7 +33,7 @@
     /*top:200px;*/
 }
 .start-button-container {
-    position: absolute;
+    /*position: absolute;*/
     top:140px;
     display: flex;
     justify-content: center;
