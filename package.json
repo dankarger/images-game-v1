@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
+    "start": "node ./server/app.js",
     "start-react": "npm run start --prefix client",
     "build-react": "npm run build --prefix client",
-    "start-server-dev": "nodemon ./server/server.js",
+    "start-server-dev": "nodemon ./server/app.js",
     "start-react-dev": "npm run start --prefix client",
     "dev": "concurrently \"npm run start-server-dev\" \"npm run start-react-dev\"",
     "heroku-postbuild": "npm install --prefix client && npm run build-react"

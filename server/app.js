@@ -1,4 +1,5 @@
-const path = require("path");
+const path = require('path');
+
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const express = require('express');
 const cors = require('cors');
@@ -17,7 +18,7 @@ app.use(express.json());
 
 app.use('/api',pictureRoute)
 
-
+// console.log('1',path,publicPath)
 app.get('*', (req,res)=> {
     res.sendFile(path.resolve(publicPath, 'index.html'));
 });
