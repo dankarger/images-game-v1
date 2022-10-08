@@ -16,26 +16,26 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
         setOpen(!open);
     };
 
-    useEffect(()=>{
-        if(showEndGame) setOpen(true);
+    useEffect(() => {
+        if (showEndGame) setOpen(true);
 
-        return ()=>{
+        return () => {
             setOpen(false)
         }
-    },[showEndGame])
+    }, [showEndGame])
 
-    if(!showEndGame) return null;
+    if (!showEndGame) return null;
 
     return (
-        <div >
+        <div>
             {!open &&
-                <div className="buttons-div">
-                    <Button variant="contained" onClick={handleToggle}>Show Score And Pictures</Button>
-                    <Button variant="outlined" color='success' onClick={startAgainFunction}>Start Again</Button>
-                </div>
+            <div className="buttons-div">
+                <Button variant="contained" onClick={handleToggle}>Show Score And Pictures</Button>
+                <Button variant="outlined" color='success' onClick={startAgainFunction}>Start Again</Button>
+            </div>
             }
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={open}
                 onClick={handleClose}
             >
@@ -46,11 +46,14 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                         <h2>Your Score : {score}</h2>
                         <p>click anywhere to continue</p>
                     </div>
-                    <ImagesList imagesList={imagesList}/>
-                    <div className="credits-div">
-                        <h1>credit:</h1>
-                        <Credits imageList={imagesList} />
+                    <div className="image-credits-div">
+                        <ImagesList imagesList={imagesList}/>
+                        {/*<div className="credits-div">*/}
+                        {/*    <h1>credit:</h1>*/}
+                        {/*    <Credits imageList={imagesList} />*/}
+                        {/*</div>*/}
                     </div>
+
                 </div>
 
             </Backdrop>

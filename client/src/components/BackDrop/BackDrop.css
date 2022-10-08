@@ -1,11 +1,13 @@
 .backdrop-content {
     position: absolute;
+    width:100%;
     top:100px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap:1rem;
+
 
 
 }
@@ -20,3 +22,10 @@
     gap:.5rem;
     white-space: nowrap;
 }
+
+/*.image-credits-div {*/
+/*    width:100%;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*}*/

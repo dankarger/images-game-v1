@@ -13,12 +13,12 @@ export default function Contact() {
     return (
         <div className='contact-page'>
             <h1>Contact Me</h1>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                <Fab color="primary" aria-label="add">
+            <Box sx={{ '& > :not(style)': { m: 3 } }}>
+                <Fab color="primary" aria-label="github">
                     <a href="https://github.com/dankarger" target='_blank'> <GitHubIcon /> </a>
                 </Fab>
-                <Fab disabled aria-label="like">
-                    <a href="https://www.linkedin.com/in/dan-karger-ba36905a/" target={'_blank'}>    <LinkedInIcon /></a>
+                <Fab  aria-label="linkedin">
+                    <a href="https://www.linkedin.com/in/dan-karger-ba36905a/" target='_blank'><LinkedInIcon /></a>
                 </Fab>
                 <Fab >
                     <a href="mailto:dk.code.org@gmail.com"><EmailIcon /></a>

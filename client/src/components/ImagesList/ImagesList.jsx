@@ -5,13 +5,13 @@ import './ImagesList.css'
 
 export default function ImagesList({imagesList}) {
 
-    const numberOfCol = imagesList.length===4? 3 : 5;
-    if(!imagesList) return null;
+    const numberOfCol = imagesList.length === 4 ? 3 : 5;
+    if (!imagesList) return null;
     return (
-        <ImageList sx={{ width: 500, height: 450 }} cols={numberOfCol} rowHeight={164}>
-            {imagesList.map((item,index) => (
+        <ImageList sx={{width: 500, height: 450}} cols={numberOfCol} rowHeight={164}>
+            {imagesList.map((item, index) => (
                 <ImageListItem key={item?.src?.small}>
-                    {index!==imagesList.length-1 &&
+                    {index !== imagesList.length - 1 &&
                     <img
                         src={`${item?.src?.small}?w=164&h=164&fit=crop&auto=format`}
                         srcSet={`${item?.src?.small}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
@@ -19,7 +19,10 @@ export default function ImagesList({imagesList}) {
                         loading="lazy"
                     />
                     }
-                    <p className={'image-title'}>{imagesList[index+1]?.imgTitle}</p>
+                    <p className={'image-title'}>{imagesList[index + 1]?.imgTitle}</p>
+                    {imagesList[index + 1] &&
+                    <a className='image-credit' href={imagesList[index + 1]?.photographer_url}><p>Photo
+                        by: {imagesList[index + 1]?.photographer}</p></a>}
                 </ImageListItem>
 
             ))}

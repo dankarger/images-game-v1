@@ -1,7 +1,15 @@
 .image-title {
     background: #343131;
-    color:white;
+    color: #d3d333;
     width:100%;
     text-align: center;
-    transform: translateY(-30px);
+    transform: translateY(-10px);
+}
+
+.image-credit {
+    transform: translateY(-10px);
+    font-size: 10pt;
+    color:whitesmoke;
+    background: #343131;
+    text-align: center;
 }
