@@ -17,10 +17,9 @@ h4 {
    margin:14px;
     /*color:transparent;*/
     color: rgba(0, 119, 168, 0.2);
-
     position:relative;
     overflow: hidden;
-    font-size: 1vw;
+    font-size: calc(5px + 1vw);
     -webkit-text-stroke: 0.02vw #2f6ee3;
     z-index: 100;
 }
@@ -28,7 +27,7 @@ h4 {
 .heading {
     color: rgba(182, 222, 239, 0.58);
     position: relative;
-    font-size: 2vw;
+    font-size: calc(5px + 2vw);;
     -webkit-text-stroke: 0.05vw #2f6ee3;
 }
 .heading::before {
