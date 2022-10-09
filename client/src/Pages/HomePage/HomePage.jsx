@@ -187,15 +187,18 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            <div className="sound-option-div">
-                <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange}/>
+            <div className="top-div">
+                <div className="sound-option-div">
+                    <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange}/>
+                </div>
+                {step !== 0 &&
+                <div className="score-div">
+                    <Score score={score}/>
+                    <ImagesCounter step={step} stepsTotal={totalSteps} isGameInProgress={isGameInProgress}/>
+                </div>
+                }
             </div>
-            {step !== 0 &&
-            <div className="score-div">
-                <Score score={score}/>
-                <ImagesCounter step={step} stepsTotal={totalSteps} isGameInProgress={isGameInProgress}/>
-            </div>
-            }
+
             {!isGameInProgress && !showEndGame &&
             <div className="start-button-container">
                 <p>How many images? </p>

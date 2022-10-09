@@ -5,7 +5,7 @@
     position: absolute;
     right: 20%;
     top: 50%;
-    transform: translate(10%,-50%);
+    /*transform: translate(10%,-50%);*/
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
@@ -16,4 +16,15 @@
 
 .images-counter {
     color: #282c34;
+}
+
+@media (max-width: 568px) {
+    .images-counter {
+      font-size: 1rem;
+    }
+    .points-div {
+        position: absolute;
+        top: 100%;
+        right:10px
+    }
 }

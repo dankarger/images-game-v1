@@ -5,8 +5,20 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     position: absolute;
-    top:80px;
+    top:20px;
     right:150px;
     z-index: 1000;
+
+}
+.score-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 568px) {
+    .score-container {
+        right:10px;
+        top:20px
+    }
 
 }

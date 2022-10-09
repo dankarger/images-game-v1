@@ -20,7 +20,7 @@ const Counter = ({count, render}) => {
     if (counter === 6) return null;
     if (counter < 0) setCounter(0)
     return (
-        <div className='counter-div'>
+        <div className='counter-div points-div'>
             <h2 className='counter'>Points: {counter}</h2>
         </div>
     )

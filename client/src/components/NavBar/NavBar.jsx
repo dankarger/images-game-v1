@@ -14,18 +14,18 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {Link} from "react-router-dom";
 
-interface Props {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window?: () => Window;
-}
+// interface Props {
+//     /**
+//      * Injected by the documentation to work in an iframe.
+//      * You won't need it on your project.
+//      */
+//     window?: () => Window;
+// }
 
 const drawerWidth = 240;
 const navItems = ['Game', 'About', 'Contact'];
 
-export default function DrawerAppBar(props: Props) {
+export default function DrawerAppBar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -104,7 +104,7 @@ export default function DrawerAppBar(props: Props) {
                     {drawer}
                 </Drawer>
             </Box>
-            <Box component="main" sx={{ p: 3 }}>
+            <Box component="main" sx={{ }}>
                 <Toolbar />
                 {/*<Typography>*/}
 
