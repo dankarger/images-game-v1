@@ -12,7 +12,7 @@ import './Contact.css'
 export default function Contact() {
     return (
         <div className='contact-page'>
-            <h1>Contact Me</h1>
+            <h4>Contact Me</h4>
             <Box sx={{ '& > :not(style)': { m: 3 } }}>
                 <Fab color="primary" aria-label="github">
                     <a href="https://github.com/dankarger" target='_blank'> <GitHubIcon /> </a>

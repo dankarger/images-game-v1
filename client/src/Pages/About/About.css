@@ -50,3 +50,29 @@ a:hover{
     color:#61dafb;
     transition: 500ms;
 }
+
+.about-h1, .about-h2 {
+    color: rgba(182, 222, 239, 0.58);
+    position: relative;
+    font-size: 3vw;
+    -webkit-text-stroke: 0.05vw #2f6ee3;
+}
+.about-h1::before, .about-h2::before {
+    content: attr(data-text);
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    color: rgba(0, 248, 124, 0.37);
+    -webkit-text-stroke: 0.2vw #2f6ee3;
+    /*border-right: 2px solid #00f87c;*/
+    overflow: hidden;
+    animation: animate 6s ease-in-out infinite;
+}
+
+.about-h2 {
+    font-size: 1.2vw;
+    -webkit-text-stroke: 0.03vw #2f6ee3;
+
+}

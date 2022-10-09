@@ -8,7 +8,7 @@ const About = () => {
     return (
         <div className='about-page'>
             <div className="about-content">
-                <div className="heading">
+                <div className="">
                     <h1 className='about-h1'>About this game</h1>
                     <h2 className='about-h2'>This game was created by &nbsp;<a href="https://github.com/dankarger" target='_blank'>Dan Karger</a>&nbsp; with:</h2>
                 </div>
