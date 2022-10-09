@@ -4,6 +4,7 @@ import './Instructions.css'
 const Instructions=()=>{
     return(
         <div className='instructions'>
+            <h3 class={'heading'} data-text={'Instructions:'}>Instructions:</h3>
             <h4> - The goal of the game is to say (or write) the first association when given a picture.</h4>
             <h4> - The first picture given is random and the following is depending on your input.</h4>
             <h4> - You can speak (after enabling the mic for this site ) or write (and press Enter) your answer. </h4>

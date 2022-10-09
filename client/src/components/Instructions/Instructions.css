@@ -8,10 +8,39 @@
     border-radius: 10px;
     border: 1px grey solid;
     padding:3rem;
-   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    overflow-y: scroll;
+    background: rgba(182, 222, 239, 0.2);
 
 }
 
 h5 {
    margin:14px;
+}
+.heading {
+    color: rgba(182, 222, 239, 0.58);
+    position: relative;
+    font-size: 2vw;
+    -webkit-text-stroke: 0.05vw #2f6ee3;
+}
+.heading::before {
+    content: attr(data-text);
+    position:absolute;
+    top:0;
+    left:0;width: 100%;
+    height:100%;
+    color: #00f87c;
+    -webkit-text-stroke: 0.0vw #2f6ee3;
+    border-right: 2px solid yellow;
+    overflow: hidden;
+    animation: animate 6s linear infinite;
+}
+
+@keyframes animate {
+    0%,10%,100% {
+        width:0
+    }
+    70%,90% {
+        width: 100%;
+    }
 }
