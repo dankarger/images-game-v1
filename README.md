@@ -10,6 +10,8 @@
 - <a href="https://www.npmjs.com/package/react-speech-kit" target='_blank'>react-speech-kit </a>" by &nbsp; <a href="https://github.com/MikeyParton" target='_blank'> MikeyParton</a>"
 - Pexel Api
 
+![alt text](./client/public/assets/screenShot1.jpg)
+
 ### Instructions : 
 <h4> - The goal of the game is to say (or write) the first association when given a picture.</h4>
                 <h4> - The first picture given is random and the following is depending on your input.</h4>
