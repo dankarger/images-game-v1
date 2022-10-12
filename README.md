@@ -1,7 +1,8 @@
 # Images-Game
+## A game using speech (or typing) 
 ### This game is created using :
 - NodeJS
-- React 
+- React
 - Mui
 - JavaScript
 - Web Speech API
