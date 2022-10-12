@@ -1,6 +1,4 @@
- 
-                  
-#Images-Game
+# Images-Game
 ### This game is created using :
 - NodeJS
 - React 
