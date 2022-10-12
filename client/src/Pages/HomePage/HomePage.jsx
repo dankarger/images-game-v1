@@ -187,6 +187,8 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
+            {/*<section>*/}
+
             <div className="top-div">
                 <div className="sound-option-div">
                     <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange}/>
@@ -240,6 +242,7 @@ const HomePage = () => {
                           startAgainFunction={startAgainFunction}/>
             </div>
             {errorMessage && <h4>{errorMessage}</h4>}
+            {/*</section>*/}
         </div>
     )
 }

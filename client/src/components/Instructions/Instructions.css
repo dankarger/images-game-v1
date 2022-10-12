@@ -1,33 +1,33 @@
 .instructions {
  display: flex;
-   /*align-self: start;*/
-   /*justify-self: end;*/
     align-items: flex-start;
     justify-content: start;
     flex-direction: column;
     border-radius: 10px;
-    border: 1px grey solid;
     padding:3rem;
    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    overflow-y: scroll;
-    background: rgba(182, 222, 239, 0.2);
 }
-
+.instruct-heading {
+    border: 1px solid  rgb(12, 152, 210);
+    padding:10px 20px;
+    border-radius: 10px;
+}
+.instruct-heading:hover {
+    cursor: pointer;
+}
 h4 {
-   margin:14px;
-    /*color:transparent;*/
-    color: rgba(0, 119, 168, 0.2);
+    color: rgb(12, 152, 210);
+    margin:5vh;
     position:relative;
     overflow: hidden;
     font-size: calc(5px + 1vw);
-    -webkit-text-stroke: 0.02vw #2f6ee3;
     z-index: 100;
 }
 
 .heading {
     color: rgba(182, 222, 239, 0.58);
     position: relative;
-    font-size: calc(5px + 2vw);;
+    font-size: calc(5px + 1.2vw);;
     -webkit-text-stroke: 0.05vw #2f6ee3;
 }
 .heading::before {
@@ -44,6 +44,46 @@ h4 {
     animation: animate 6s ease-in-out infinite;
 }
 
+.text {
+   width:100%;
+    height:100%;
+}
+
+.visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+
+}
+
+.hidden {
+    opacity:0;
+    filter: blur(5px);
+    transition: all 1s;
+    transform: translateX(-150%);
+}
+
+.instruct-animation {
+
+    transition: 1s;
+    animation: scaleAnimation 1s infinite  ease-in-out;
+
+}
+
+@keyframes scaleAnimation {
+    0%,10% {
+        transform: scale(1,1);
+    }
+    50%{
+        transform: scale(1,1.1);
+    }
+    80%{
+        transform: scale(1,1.1);
+    }
+    90%{
+        transform: scale(1,1.1);
+    }
+}
 @keyframes animate {
     0%,10%,100% {
         width:0
