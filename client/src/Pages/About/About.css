@@ -47,8 +47,8 @@ a {
 }
 
 a:hover{
-    color:#61dafb;
-    transition: 500ms;
+    /*color:#61dafb;*/
+    /*transition: 500ms;*/
 }
 
 .about-h1, .about-h2 {
