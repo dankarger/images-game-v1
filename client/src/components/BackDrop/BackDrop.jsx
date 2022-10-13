@@ -44,7 +44,8 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                     <div className="message">
                         <h1>Game Over</h1>
                         <h2>Your Score : {score}</h2>
-                        <p>click anywhere to continue</p>
+                        <p>- Click on a picture or the photographer name to go to Pexel.com </p>
+                        <p>- Click anywhere else to continue</p>
                     </div>
                     <div className="image-credits-div">
                         <ImagesList imagesList={imagesList}/>
