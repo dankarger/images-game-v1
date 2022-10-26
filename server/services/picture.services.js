@@ -1,7 +1,7 @@
 const axios = require("axios");
 const path = require("path");
 require('dotenv').config({path: path.resolve(__dirname, '../../.env')});
-
+const {pickRandomSubject} = require( "../utils/utils")
 
 
 
@@ -18,7 +18,11 @@ const getPictureService = async (keyWords) => {
     };
     return axios.request(options).then(function (response) {
         console.log('hello',response.data.photos)
-
+        console.log('hello2',response.data)
+        if(response.data.photos.length ===0) {
+            console.log('no photo')
+          return {message:'no-photo'}
+        }
         return response.data.photos
     }).catch(function (error) {
         console.error(error);

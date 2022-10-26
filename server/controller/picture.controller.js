@@ -7,8 +7,15 @@ const getPicture = async (req, res) => {
         if(typeof keyWords !== 'string' || keyWords.length > 20 ) {
             res.status(400).json({message: 'not valid'})
         }
-        const picture = await pictureService.getPictureService(keyWords)
-        res.status(200).send(picture);
+        let picture = await pictureService.getPictureService(keyWords)
+        console.log('picture',picture)
+        if(picture.message === 'no-photo') {
+            picture = await pictureService.getPictureService('error')
+            res.status(200).send(picture);
+        }else {
+            res.status(200).send(picture);
+        }
+
     }
     catch(e){
         res.status(400).json({message: 'data not found' + e.message})
