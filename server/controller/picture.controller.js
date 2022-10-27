@@ -8,7 +8,7 @@ const getPicture = async (req, res) => {
             res.status(400).json({message: 'not valid'})
         }
         let picture = await pictureService.getPictureService(keyWords)
-        console.log('picture',picture)
+
         if(picture.message === 'no-photo') {
             picture = await pictureService.getPictureService('error')
             res.status(200).send(picture);
