@@ -13,10 +13,12 @@ const Instructions=()=>{
 
     return(
         <div className='instructions'>
-            <div className='instruct-animation'  >
+            {/*<div className='instruct-animation'  >*/}
                 {/*<h3 className={'heading '} data-text={'Instructions:'}>Instructions:</h3>*/}
-            <BasicButton onclick={handleInstructClick} color={'info'} theme={'contained'} label={'Instructions:'} />
-            </div>
+             <div className="instruct-button">
+                 <BasicButton onclick={handleInstructClick} color={'info'} theme={'contained'} label={'Instructions:'} />
+             </div>
+            {/*</div>*/}
             <div className={isInstructionsVisible?'text visible' : 'text hidden'}>
                 <h4> - The goal of the game is to say (or write) the first association when given a picture.</h4>
                 <h4> - The first picture given is random and the following is depending on your input.</h4>

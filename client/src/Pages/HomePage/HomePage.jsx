@@ -137,7 +137,6 @@ const HomePage = () => {
         try {
             if (step <= totalSteps) {
                 player(soundList['paper'], sound.current)
-
                 setStep((prev) => prev + 1)
                 const picturesList = await api.get(`/picture?query=${query}`)
                 const picture = await pickRandomPicture(picturesList.data);

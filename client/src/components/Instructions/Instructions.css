@@ -1,6 +1,6 @@
 .instructions {
  display: flex;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     justify-content: start;
     flex-direction: column;
     border-radius: 10px;
@@ -41,7 +41,7 @@ h4 {
     -webkit-text-stroke: 0.0vw #2f6ee3;
     /*border-right: 2px solid #00f87c;*/
     overflow: hidden;
-    animation: animate 6s ease-in-out infinite;
+    /*animation: animate 6s ease-in-out infinite;*/
 }
 
 .text {
@@ -70,6 +70,12 @@ h4 {
 
 }
 
+.instruct-button {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
 @keyframes scaleAnimation {
     0%,10% {
         transform: scale(1,1);
