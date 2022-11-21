@@ -10,22 +10,22 @@ import Paper from '@mui/material/Paper';
 
 export default function Credits({imageList}) {
 
-    console.log('iiiii',imageList)
-   const injectRows=()=>{
-        return imageList.map((image,index)=>{
+    console.log('iiiii', imageList)
+    const injectRows = () => {
+        return imageList.map((image, index) => {
             return (
                 <div>
-                    <p>{index+1}</p>
+                    <p>{index + 1}</p>
                     <a href={image.photographer_url} target='_blank'>{image.photographer} </a>
                 </div>
             )
         })
-   }
-    console.log('rows',injectRows())
+    }
+    console.log('rows', injectRows())
 
     return (
-    <div>
-        {imageList && injectRows()}
-    </div>
+        <div>
+            {imageList && injectRows()}
+        </div>
     )
 }

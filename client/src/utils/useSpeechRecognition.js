@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import {useRef, useEffect, useState, useCallback} from 'react';
 
 /**
  * Custom hook similar to useCallback, but for callbacks where the dependencies
@@ -30,7 +30,12 @@ const useEventCallback = (fn, dependencies) => {
 };
 
 export const useSpeechRecognition = (props = {}) => {
-    const { onEnd = () => {}, onResult = () => {}, onError = () => {} } = props;
+    const {
+        onEnd = () => {
+        }, onResult = () => {
+        }, onError = () => {
+        }
+    } = props;
     const recognition = useRef(null);
     const [listening, setListening] = useState(false);
     const [supported, setSupported] = useState(false);
@@ -46,7 +51,8 @@ export const useSpeechRecognition = (props = {}) => {
 
     const handleError = (event) => {
         if (event.error === 'not-allowed') {
-            recognition.current.onend = () => {};
+            recognition.current.onend = () => {
+            };
             setListening(false);
         }
         onError(event);
@@ -79,9 +85,12 @@ export const useSpeechRecognition = (props = {}) => {
 
     const stop = useEventCallback(() => {
         if (!listening || !supported) return;
-        recognition.current.onresult = () => {};
-        recognition.current.onend = () => {};
-        recognition.current.onerror = () => {};
+        recognition.current.onresult = () => {
+        };
+        recognition.current.onend = () => {
+        };
+        recognition.current.onerror = () => {
+        };
         setListening(false);
         recognition.current.stop();
         onEnd();

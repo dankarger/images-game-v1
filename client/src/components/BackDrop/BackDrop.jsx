@@ -39,7 +39,6 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                 open={open}
                 onClick={handleClose}
             >
-                {/*<CircularProgress color="inherit" />*/}
                 <div className="backdrop-content">
                     <div className="message">
                         <h1>Game Over</h1>
@@ -49,10 +48,6 @@ export default function SimpleBackdrop({score, showEndGame, imagesList, startAga
                     </div>
                     <div className="image-credits-div">
                         <ImagesList imagesList={imagesList}/>
-                        {/*<div className="credits-div">*/}
-                        {/*    <h1>credit:</h1>*/}
-                        {/*    <Credits imageList={imagesList} />*/}
-                        {/*</div>*/}
                     </div>
 
                 </div>

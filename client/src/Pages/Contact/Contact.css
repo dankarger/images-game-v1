@@ -1,16 +1,17 @@
 .contact-page {
-    width:100%;
-    height:100vh;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    gap:4rem;
+    gap: 4rem;
 
 
 }
+
 .contact-content {
-    width:300px;
+    width: 300px;
     display: flex;
     justify-content: space-around;
     align-content: center;

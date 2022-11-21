@@ -1,24 +1,27 @@
 .instructions {
- display: flex;
+    display: flex;
     /*align-items: flex-start;*/
     justify-content: start;
     flex-direction: column;
     border-radius: 10px;
-    padding:3rem;
-   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    padding: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
+
 .instruct-heading {
-    border: 1px solid  rgb(12, 152, 210);
-    padding:10px 20px;
+    border: 1px solid rgb(12, 152, 210);
+    padding: 10px 20px;
     border-radius: 10px;
 }
+
 .instruct-heading:hover {
     cursor: pointer;
 }
+
 h4 {
     color: rgb(12, 152, 210);
-    margin:5vh;
-    position:relative;
+    margin: 5vh;
+    position: relative;
     overflow: hidden;
     font-size: calc(5px + 1vw);
     z-index: 100;
@@ -30,23 +33,22 @@ h4 {
     font-size: calc(5px + 1.2vw);;
     -webkit-text-stroke: 0.05vw #2f6ee3;
 }
+
 .heading::before {
     content: attr(data-text);
-    position:absolute;
-    top:0;
-    left:0;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height:100%;
+    height: 100%;
     color: rgba(0, 248, 124, 0.37);
     -webkit-text-stroke: 0.0vw #2f6ee3;
-    /*border-right: 2px solid #00f87c;*/
     overflow: hidden;
-    /*animation: animate 6s ease-in-out infinite;*/
 }
 
 .text {
-   width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
 
 .visible {
@@ -57,7 +59,7 @@ h4 {
 }
 
 .hidden {
-    opacity:0;
+    opacity: 0;
     filter: blur(5px);
     transition: all 1s;
     transform: translateX(-150%);
@@ -66,7 +68,7 @@ h4 {
 .instruct-animation {
 
     transition: 1s;
-    animation: scaleAnimation 1s infinite  ease-in-out;
+    animation: scaleAnimation 1s infinite ease-in-out;
 
 }
 
@@ -76,25 +78,27 @@ h4 {
     align-content: center;
     justify-content: center;
 }
+
 @keyframes scaleAnimation {
-    0%,10% {
-        transform: scale(1,1);
+    0%, 10% {
+        transform: scale(1, 1);
     }
-    50%{
-        transform: scale(1,1.1);
+    50% {
+        transform: scale(1, 1.1);
     }
-    80%{
-        transform: scale(1,1.1);
+    80% {
+        transform: scale(1, 1.1);
     }
-    90%{
-        transform: scale(1,1.1);
+    90% {
+        transform: scale(1, 1.1);
     }
 }
+
 @keyframes animate {
-    0%,10%,100% {
-        width:0
+    0%, 10%, 100% {
+        width: 0
     }
-    70%,90% {
+    70%, 90% {
         width: 100%;
     }
 }

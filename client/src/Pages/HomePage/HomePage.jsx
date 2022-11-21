@@ -34,7 +34,6 @@ const HomePage = () => {
         },
     });
     const [isGameInProgress, setIsGameInProgress] = useState(false);
-    // const [counter, setCounter] = useState(6);
     const [score, setScore] = useState(0);
     const [step, setStep] = useState(0);
     const [totalSteps, setTotalSteps] = useState(4)
@@ -48,8 +47,7 @@ const HomePage = () => {
     let sound = useRef(true)
 
     useEffect(() => {
-        // const controller = new AbortController();
-        // const signal = controller.signal;
+
         let isCancel = false;
         if (!isCancel && isGameInProgress && value) {
             // setTimeout(()=>{
@@ -69,7 +67,6 @@ const HomePage = () => {
             if (counter.current > 0) {
                 interval.current = setInterval(() => {
                     player(soundList['click'], sound.current)
-                    // setCounter((prev) => prev - 1);
                     if (counter.current > 0) counter.current -= 1;
 
                     setRender((prev) => !prev)
@@ -186,8 +183,6 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            {/*<section>*/}
-
             <div className="top-div">
                 <div className="sound-option-div">
                     <CustomizedSwitches handleSoundSwitchChange={handleSoundSwitchChange}/>
@@ -228,7 +223,6 @@ const HomePage = () => {
             }
             {!isGameInProgress && !showEndGame && <Instructions/>}
             {isGameInProgress &&
-            // <textarea
 
             <div className='buttons-div'>
                 <BasicButton label='PAUSE' theme={"outlined"} color={'error'} onclick={stop}/>
@@ -241,7 +235,6 @@ const HomePage = () => {
                           startAgainFunction={startAgainFunction}/>
             </div>
             {errorMessage && <h4>{errorMessage}</h4>}
-            {/*</section>*/}
         </div>
     )
 }

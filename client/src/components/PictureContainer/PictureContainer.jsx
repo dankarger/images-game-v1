@@ -4,7 +4,7 @@ import Counter from "../Counter/Counter";
 
 const PictureContainer = ({pictureObject}) => {
 
-    if(!pictureObject) return null;
+    if (!pictureObject) return null;
 
     const {
         imgTitle, photographer, photographer_url

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
 const useAudio = url => {
     const [audio] = useState(new Audio(url));
@@ -22,7 +22,7 @@ const useAudio = url => {
     return [playing, toggle];
 };
 
-const SoundPlayer = ({ url }) => {
+const SoundPlayer = ({url}) => {
     const [playing, toggle] = useAudio(url);
 
     return (

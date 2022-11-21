@@ -11,8 +11,7 @@ const Counter = ({count, render}) => {
         if (count >= 0) {
 
             setCounter(count)
-        }
-        else {
+        } else {
             setCounter(0);
         }
     }, [count, render])

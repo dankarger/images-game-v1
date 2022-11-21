@@ -12,18 +12,17 @@ export default function BasicSelect({setTotalStep}) {
         setValue(event.target.value);
 
         setTotalStep(event.target.value)
-        console.log('e',event.target.value)
+        console.log('e', event.target.value)
     };
 
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{minWidth: 120}}>
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label"> </InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={value}
-                    // label="Step"
                     onChange={handleChange}
                 >
                     <MenuItem value={4}>Three</MenuItem>

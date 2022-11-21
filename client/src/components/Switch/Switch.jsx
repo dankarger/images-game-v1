@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import {styled} from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 
-const AntSwitch = styled(Switch)(({ theme }) => ({
+const AntSwitch = styled(Switch)(({theme}) => ({
     width: 28,
     height: 16,
     padding: 0,
@@ -53,16 +51,16 @@ export default function CustomizedSwitches({handleSoundSwitchChange}) {
 
 
     return (
-            <div>
-                <Typography>SOUND</Typography>
+        <div>
+            <Typography>SOUND</Typography>
 
             <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>Off</Typography>
-                <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }}
-                           onChange={handleSoundSwitchChange} />
+                <AntSwitch defaultChecked inputProps={{'aria-label': 'ant design'}}
+                           onChange={handleSoundSwitchChange}/>
                 <Typography>On</Typography>
             </Stack>
-            </div>
+        </div>
 
     );
 }
